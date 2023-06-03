@@ -35,6 +35,9 @@ public class Football {
      */
     private List<Student> team = new ArrayList<Student>();
 
+    // Name
+    private String name;
+
 
     public String getGame() {
         return name;

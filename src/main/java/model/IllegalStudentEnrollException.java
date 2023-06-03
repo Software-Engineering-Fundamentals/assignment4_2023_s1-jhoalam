@@ -3,7 +3,7 @@ package model;
 /**
  * Exception when a Student can not be added to a Programme
  */
-public class IllegalStudentEnrollException extends Exception {
+public class IllegalStudentEnrollException extends RuntimeException {
 	 public IllegalStudentEnrollException(String errorMessage) {
 	        super(errorMessage);}
 }

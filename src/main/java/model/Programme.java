@@ -12,7 +12,7 @@ public class Programme {
      * Name and id of the programme
      */
     private String name;
-    print int pID;
+    private int pID;
 
     /**
      * Start date of the programme
@@ -34,6 +34,10 @@ public class Programme {
      */
     private List<Student> enrolled = new ArrayList<Student>();
 
+    // Football
+    private Football football;
+
+
     public String getName() {
         return name;
     }
@@ -42,7 +46,7 @@ public class Programme {
         this.name = name;
     }
 
-    public String getID() {
+    public int getID() {
         return pID;
     }
 
@@ -95,8 +99,30 @@ public class Programme {
      */
 
     public boolean addStudent(Student student){
-    	return false;
-   
+    	// Cannot add a student if the start date has passed.
+        if (new Date().after(this.startDate)) {
+            return false;
+        }
+
+        // Checking if enrolled students is over the limit
+        if (this.enrolled.size() >= 250) {
+            return false;
+        }
+
+        // A student cannot enroll if they are already enrolled in the same programme
+        for (Student s : this.enrolled) {
+            if (s.getId() == student.getId()) {
+                throw new IllegalStudentEnrollException("Student is already enrolled in this programme");
+            }
+        }
+
+        // Ff all requirements are met, then the student is enrolled
+        this.enrolled.add(student);
+
+        // Also add the student to the list of students for Football
+        this.football.addAvailStudent(student);
+        
+        return true;
     }
 
 
